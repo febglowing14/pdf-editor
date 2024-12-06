@@ -12,8 +12,8 @@ export default function Home() {
   const pdfWrapperRef = useRef<HTMLDivElement | null>(null);
 
   // Handle file upload
-  const onFileChange = (event: any) => {
-    const file = event.target.files[0];
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file && file.type === "application/pdf") {
       const reader = new FileReader();
       reader.onload = () => {
@@ -28,7 +28,9 @@ export default function Home() {
     const pdfWrapper = pdfWrapperRef.current;
     if (pdfWrapper) {
       // Remove existing Fabric.js canvas if present
-      const existingCanvas = pdfWrapper.querySelector("#pdf-fabric-canvas") as HTMLCanvasElement;
+      const existingCanvas = pdfWrapper.querySelector<HTMLCanvasElement>(
+        "#pdf-fabric-canvas"
+      );
       if (existingCanvas) {
         existingCanvas.remove();
       }
@@ -59,7 +61,9 @@ export default function Home() {
   const resizeCanvas = () => {
     const pdfWrapper = pdfWrapperRef.current;
     if (pdfWrapper && fabricCanvasRef.current) {
-      const canvasElement = pdfWrapper.querySelector("#pdf-fabric-canvas") as HTMLCanvasElement;
+      const canvasElement = pdfWrapper.querySelector<HTMLCanvasElement>(
+        "#pdf-fabric-canvas"
+      );
       if (canvasElement) {
         canvasElement.width = pdfWrapper.offsetWidth;
         canvasElement.height = pdfWrapper.offsetHeight;
@@ -70,24 +74,23 @@ export default function Home() {
   };
 
   // Add blur rectangle
-  // Add blur rectangle
-const blurText = () => {
-  console.log("clicked blurtext");
-  const fabricCanvas = fabricCanvasRef.current;
-  if (fabricCanvas) {
-    const rect = new fabric.Rect({
-      left: 100,
-      top: 100,
-      fill: "rgba(0, 0, 0, 0.5)", // Semi-transparent black for blur
-      width: 150,
-      height: 50,
-      selectable: true,
-    });
-    fabricCanvas.add(rect);
-    fabricCanvas.renderAll(); // Ensure the rectangle is rendered
-    console.log("Blur rectangle added:", rect);
-  }
-};
+  const blurText = () => {
+    console.log("clicked blurtext");
+    const fabricCanvas = fabricCanvasRef.current;
+    if (fabricCanvas) {
+      const rect = new fabric.Rect({
+        left: 100,
+        top: 100,
+        fill: "rgba(0, 0, 0, 0.5)", // Semi-transparent black for blur
+        width: 150,
+        height: 50,
+        selectable: true,
+      });
+      fabricCanvas.add(rect);
+      fabricCanvas.renderAll(); // Ensure the rectangle is rendered
+      console.log("Blur rectangle added:", rect);
+    }
+  };
 
   // Add sample text
   const addText = () => {
