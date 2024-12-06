@@ -166,3 +166,13 @@ a.secondary {
     filter: invert();
   }
 }
+
+#pdf-fabric-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensure it's above the PDF viewer */
+  pointer-events: none; /* Prevent interference with the PDF viewer */
+}
+
+
