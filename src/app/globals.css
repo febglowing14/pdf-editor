@@ -46,9 +46,21 @@ a {
   top: 0;
   left: 0;
   z-index: 10; /* Ensure it's above the PDF viewer */
-  pointer-events: none; /* Prevent interference with the PDF viewer */
+  pointer-events: none; /* Optional: Ensure Fabric.js canvas does not block interaction with the PDF viewer */
+}
+#pdf-wrapper {
+  position: relative; /* Ensure positioning context for the absolute canvas */
+}
+#pdf-fabric-canvas {
+  border: 2px dashed red; /* Debugging: Visualize the canvas boundary */
 }
 
+#pdf-wrapper {
+  border: 2px solid green; /* Debugging: Visualize the wrapper boundary */
+}
 
+#pdf-fabric-canvas {
+  background-color: rgba(255, 0, 0, 0.2); /* Semi-transparent red for debugging */
+}
 
 
